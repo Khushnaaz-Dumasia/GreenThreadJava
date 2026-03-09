@@ -1,0 +1,60 @@
+.root {
+    -fx-base: #1a1a2e;
+    -fx-accent: #0f3460;
+    -fx-default-button: #e94560;
+    -fx-focus-color: #e94560;
+    -fx-font-family: 'Segoe UI', sans-serif;
+}
+
+.main-container {
+    -fx-background-color: linear-gradient(to bottom right, #1a1a2e, #16213e);
+    -fx-padding: 20;
+}
+
+.header-text {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #e94560;
+}
+
+.stat-card {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+    -fx-background-radius: 15;
+    -fx-padding: 20;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 5);
+}
+
+.stat-title {
+    -fx-font-size: 14px;
+    -fx-text-fill: #999999;
+}
+
+.stat-value {
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffffff;
+}
+
+.chart-panel {
+    -fx-background-color: rgba(255, 255, 255, 0.03);
+    -fx-background-radius: 15;
+    -fx-padding: 10;
+}
+
+.chart-line {
+    -fx-stroke: #e94560;
+    -fx-stroke-width: 3;
+}
+
+.green-break-panel {
+    -fx-background-color: linear-gradient(to right, #00b09b, #96c93d);
+    -fx-background-radius: 10;
+    -fx-padding: 15;
+    -fx-margin: 10 0 0 0;
+}
+
+.break-text {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffffff;
+}

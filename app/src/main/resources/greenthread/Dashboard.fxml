@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" 
+      fx:controller="greenthread.DashboardController" 
+      prefHeight="600.0" prefWidth="900.0" spacing="20" styleClass="main-container">
+
+    <HBox alignment="CENTER_LEFT" spacing="20">
+        <Label text="GreenThread" styleClass="header-text" />
+        <Region HBox.hgrow="ALWAYS" />
+        <Label text="Energy Efficiency Dashboard" style="-fx-text-fill: #999999;" />
+    </HBox>
+
+    <HBox spacing="20">
+        <VBox spacing="10" HBox.hgrow="ALWAYS" styleClass="stat-card">
+            <Label text="CURRENT CPU" styleClass="stat-title" />
+            <Label fx:id="cpuLabel" text="0.0%" styleClass="stat-value" />
+        </VBox>
+        <VBox spacing="10" HBox.hgrow="ALWAYS" styleClass="stat-card">
+            <Label text="CURRENT BRIGHTNESS" styleClass="stat-title" />
+            <Label fx:id="brightnessLabel" text="0.0%" styleClass="stat-value" />
+        </VBox>
+        <VBox spacing="10" HBox.hgrow="ALWAYS" styleClass="stat-card">
+            <Label text="CO2 EMISSIONS" styleClass="stat-title" />
+            <Label fx:id="co2Label" text="0.0 g/h" styleClass="stat-value" />
+        </VBox>
+    </HBox>
+
+    <VBox fx:id="greenBreakPanel" styleClass="green-break-panel" visible="false">
+        <Label text="🌿 Time for a Green Break!" styleClass="break-text" />
+        <Label text="Your carbon impact for the last hour is high. Consider stepping away for 5 minutes." 
+               style="-fx-text-fill: white;" />
+    </VBox>
+
+    <VBox VBox.vgrow="ALWAYS" styleClass="chart-panel">
+        <LineChart fx:id="emissionsChart" title="Emission History (g/h)" animated="false">
+            <xAxis>
+                <CategoryAxis label="Time" side="BOTTOM" />
+            </xAxis>
+            <yAxis>
+                <NumberAxis label="Grams" side="LEFT" />
+            </yAxis>
+        </LineChart>
+    </VBox>
+
+</VBox>
