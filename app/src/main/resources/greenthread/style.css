@@ -1,60 +1,151 @@
 .root {
-    -fx-base: #1a1a2e;
-    -fx-accent: #0f3460;
-    -fx-default-button: #e94560;
-    -fx-focus-color: #e94560;
-    -fx-font-family: 'Segoe UI', sans-serif;
+    -fx-base: #0f172a;
+    -fx-accent: #38bdf8;
+    -fx-default-button: #38bdf8;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
 }
 
 .main-container {
-    -fx-background-color: linear-gradient(to bottom right, #1a1a2e, #16213e);
-    -fx-padding: 20;
+    -fx-background-color: linear-gradient(to bottom right, #0f172a, #1e293b, #334155);
 }
 
 .header-text {
-    -fx-font-size: 28px;
+    -fx-font-size: 32px;
     -fx-font-weight: bold;
-    -fx-text-fill: #e94560;
+    -fx-text-fill: linear-gradient(to right, #4ade80, #38bdf8);
 }
 
-.stat-card {
+.header-subtext {
+    -fx-font-size: 14px;
+    -fx-text-fill: #94a3b8;
+}
+
+/* Glassmorphism Cards */
+.glass-card {
     -fx-background-color: rgba(255, 255, 255, 0.05);
-    -fx-background-radius: 15;
+    -fx-background-radius: 20;
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-radius: 20;
+    -fx-border-width: 1;
     -fx-padding: 20;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 5);
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 20, 0, 0, 10);
+}
+
+.budget-card {
+    -fx-background-color: rgba(56, 189, 248, 0.1);
+    -fx-border-color: rgba(56, 189, 248, 0.3);
 }
 
 .stat-title {
-    -fx-font-size: 14px;
-    -fx-text-fill: #999999;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #94a3b8;
+    -fx-letter-spacing: 1px;
 }
 
 .stat-value {
     -fx-font-size: 32px;
     -fx-font-weight: bold;
+    -fx-text-fill: #f8fafc;
+}
+
+.stat-value-large {
+    -fx-font-size: 40px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #4ade80;
+}
+
+.stat-small {
+    -fx-font-size: 12px;
+    -fx-text-fill: #64748b;
+}
+
+/* Progress Bars */
+.progress-bar>.bar {
+    -fx-background-radius: 5;
+}
+
+.mini-progress-cpu>.bar {
+    -fx-background-color: #f43f5e;
+}
+
+.mini-progress-bright>.bar {
+    -fx-background-color: #fbbf24;
+}
+
+.budget-progress-bar>.bar {
+    -fx-background-color: #4ade80;
+}
+
+.progress-bar {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-background-radius: 5;
+    -fx-pref-height: 6;
+}
+
+/* Toggle Buttons */
+.toggle-button {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+    -fx-background-radius: 30;
+    -fx-text-fill: #94a3b8;
+    -fx-padding: 8 20;
+    -fx-cursor: hand;
+    -fx-border-color: transparent;
+}
+
+.toggle-button-active {
+    -fx-background-color: #38bdf8;
+    -fx-background-radius: 30;
     -fx-text-fill: #ffffff;
+    -fx-padding: 8 20;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(56, 189, 248, 0.5), 10, 0, 0, 0);
 }
 
-.chart-panel {
-    -fx-background-color: rgba(255, 255, 255, 0.03);
-    -fx-background-radius: 15;
-    -fx-padding: 10;
+/* Chart Styles */
+.modern-chart {
+    -fx-legend-visible: false;
 }
 
-.chart-line {
-    -fx-stroke: #e94560;
+.chart-series-line {
+    -fx-stroke: #4ade80;
     -fx-stroke-width: 3;
 }
 
-.green-break-panel {
-    -fx-background-color: linear-gradient(to right, #00b09b, #96c93d);
-    -fx-background-radius: 10;
-    -fx-padding: 15;
-    -fx-margin: 10 0 0 0;
+.chart-plot-background {
+    -fx-background-color: transparent;
 }
 
-.break-text {
+/* Notifications */
+.tip-panel-glass {
+    -fx-background-color: rgba(56, 189, 248, 0.1);
+    -fx-background-radius: 15;
+    -fx-padding: 15 25;
+    -fx-border-color: rgba(56, 189, 248, 0.3);
+    -fx-border-radius: 15;
+}
+
+.break-panel-glass {
+    -fx-background-color: rgba(244, 63, 94, 0.1);
+    -fx-background-radius: 15;
+    -fx-padding: 15 25;
+    -fx-border-color: rgba(244, 63, 94, 0.3);
+    -fx-border-radius: 15;
+}
+
+.tip-title {
     -fx-font-size: 16px;
     -fx-font-weight: bold;
-    -fx-text-fill: #ffffff;
+    -fx-text-fill: #f8fafc;
+}
+
+.tip-content {
+    -fx-font-size: 14px;
+    -fx-text-fill: #cbd5e1;
+}
+
+.offender-item {
+    -fx-text-fill: #f8fafc;
+    -fx-font-size: 13px;
 }

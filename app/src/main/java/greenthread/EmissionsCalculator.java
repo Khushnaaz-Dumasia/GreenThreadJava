@@ -17,11 +17,14 @@ public class EmissionsCalculator {
      * @param brightness Percentage (0-100)
      * @return grams of CO2 per hour
      */
-    public double calculateHourlyEmissions(double cpuUsage, double brightness) {
+    public double calculateHourlyEmissions(double cpuUsage, double brightness, double networkMbps) {
         double cpuPower = (cpuUsage / 100.0) * MAX_CPU_POWER_WATTS;
         double brightnessPower = (brightness / 100.0) * MAX_BRIGHTNESS_POWER_WATTS;
 
-        double totalPowerWatts = BASE_POWER_WATTS + cpuPower + brightnessPower;
+        // Network impact: 0.05W per Mbps of data transfer (estimated)
+        double networkPower = networkMbps * 0.05;
+
+        double totalPowerWatts = BASE_POWER_WATTS + cpuPower + brightnessPower + networkPower;
 
         // Convert Watts to kWh for one hour: (Watts * 1 hour) / 1000
         double energyKWh = totalPowerWatts / 1000.0;

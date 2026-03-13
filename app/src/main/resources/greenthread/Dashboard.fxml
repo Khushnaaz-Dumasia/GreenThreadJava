@@ -1,50 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.chart.*?>
-<?import javafx.scene.control.*?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 
-<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" 
-      fx:controller="greenthread.DashboardController" 
-      prefHeight="600.0" prefWidth="900.0" spacing="20" styleClass="main-container">
+<VBox spacing="20" styleClass="main-container" stylesheets="@style.css" xmlns:fx="http://javafx.com/fxml" 
+      fx:controller="greenthread.DashboardController" prefWidth="900" prefHeight="700">
+    <padding><Insets top="30" right="30" bottom="30" left="30"/></padding>
 
+    <!-- Header Section -->
     <HBox alignment="CENTER_LEFT" spacing="20">
-        <Label text="GreenThread" styleClass="header-text" />
+        <VBox>
+            <Label text="GreenThread" styleClass="header-text" />
+            <Label text="Energy &amp; Carbon Insights" styleClass="header-subtext" />
+        </VBox>
         <Region HBox.hgrow="ALWAYS" />
-        <Label text="Energy Efficiency Dashboard" style="-fx-text-fill: #999999;" />
+        <HBox spacing="10" alignment="CENTER">
+            <Button text="Real-time" fx:id="realTimeBtn" onAction="#showRealTime" styleClass="toggle-button-active" />
+            <Button text="24h History" fx:id="historyBtn" onAction="#showHistory" styleClass="toggle-button" />
+        </HBox>
     </HBox>
 
+    <!-- Statistics Cards -->
     <HBox spacing="20">
-        <VBox spacing="10" HBox.hgrow="ALWAYS" styleClass="stat-card">
-            <Label text="CURRENT CPU" styleClass="stat-title" />
+        <VBox spacing="10" HBox.hgrow="ALWAYS" styleClass="glass-card">
+            <Label text="CPU LOAD" styleClass="stat-title" />
             <Label fx:id="cpuLabel" text="0.0%" styleClass="stat-value" />
+            <ProgressBar fx:id="cpuProgress" progress="0.0" prefWidth="200" styleClass="mini-progress-cpu" />
         </VBox>
-        <VBox spacing="10" HBox.hgrow="ALWAYS" styleClass="stat-card">
-            <Label text="CURRENT BRIGHTNESS" styleClass="stat-title" />
+        <VBox spacing="10" HBox.hgrow="ALWAYS" styleClass="glass-card">
+            <Label text="BRIGHTNESS" styleClass="stat-title" />
             <Label fx:id="brightnessLabel" text="0.0%" styleClass="stat-value" />
+            <ProgressBar fx:id="brightnessProgress" progress="0.0" prefWidth="200" styleClass="mini-progress-bright" />
         </VBox>
-        <VBox spacing="10" HBox.hgrow="ALWAYS" styleClass="stat-card">
-            <Label text="CO2 EMISSIONS" styleClass="stat-title" />
-            <Label fx:id="co2Label" text="0.0 g/h" styleClass="stat-value" />
+        <VBox spacing="10" HBox.hgrow="ALWAYS" styleClass="glass-card">
+            <Label text="NET ACTIVITY" styleClass="stat-title" />
+            <Label fx:id="netLabel" text="0 KB/s" styleClass="stat-value" />
+            <Label fx:id="netTotalLabel" text="Session: 0 MB" styleClass="stat-small" />
+        </VBox>
+        <VBox spacing="10" HBox.hgrow="ALWAYS" styleClass="glass-card">
+            <Label text="CURRENT RATE" styleClass="stat-title" />
+            <Label fx:id="co2Label" text="0.00 g/h" styleClass="stat-value" />
+            <Label text="CO2 Emissions" styleClass="stat-small" />
         </VBox>
     </HBox>
 
-    <VBox fx:id="greenBreakPanel" styleClass="green-break-panel" visible="false">
-        <Label text="🌿 Time for a Green Break!" styleClass="break-text" />
-        <Label text="Your carbon impact for the last hour is high. Consider stepping away for 5 minutes." 
-               style="-fx-text-fill: white;" />
-    </VBox>
+    <HBox spacing="20" VBox.vgrow="ALWAYS">
+        <!-- Main Chart Section -->
+        <VBox spacing="15" HBox.hgrow="ALWAYS" styleClass="glass-card">
+            <Label text="EMISSION TRENDS" styleClass="stat-title" />
+            <LineChart fx:id="emissionsChart" animated="false" styleClass="modern-chart">
+                <xAxis><CategoryAxis side="BOTTOM" /></xAxis>
+                <yAxis><NumberAxis side="LEFT" /></yAxis>
+            </LineChart>
+        </VBox>
 
-    <VBox VBox.vgrow="ALWAYS" styleClass="chart-panel">
-        <LineChart fx:id="emissionsChart" title="Emission History (g/h)" animated="false">
-            <xAxis>
-                <CategoryAxis label="Time" side="BOTTOM" />
-            </xAxis>
-            <yAxis>
-                <NumberAxis label="Grams" side="LEFT" />
-            </yAxis>
-        </LineChart>
-    </VBox>
+        <!-- Right Insights Column -->
+        <VBox spacing="20" prefWidth="250">
+            <!-- Carbon Budget -->
+            <VBox spacing="10" styleClass="glass-card, budget-card">
+                <Label text="DAILY BUDGET" styleClass="stat-title" />
+                <Label fx:id="dailyTotalLabel" text="0.00 g" styleClass="stat-value-large" />
+                <Label text="Target: 50.0g" styleClass="stat-small" />
+                <ProgressBar fx:id="budgetProgress" progress="0.0" prefWidth="210" styleClass="budget-progress-bar" />
+                <Label fx:id="budgetStatusLabel" text="Under Budget" styleClass="stat-label-safe" />
+            </VBox>
 
+            <!-- Top Offenders -->
+            <VBox spacing="10" VBox.vgrow="ALWAYS" styleClass="glass-card">
+                <Label text="TOP OFFENDERS" styleClass="stat-title" />
+                <VBox fx:id="offendersBox" spacing="8" />
+            </VBox>
+        </VBox>
+    </HBox>
+
+    <!-- Footer Notification -->
+    <StackPane>
+        <HBox fx:id="ecoTipPanel" spacing="15" alignment="CENTER_LEFT" styleClass="tip-panel-glass">
+            <Label text="💡" style="-fx-font-size: 24px;" />
+            <VBox>
+                <Label text="Eco-Tip" styleClass="tip-title" />
+                <Label fx:id="ecoTipLabel" text="Lowering screen brightness can significantly reduce energy consumption." 
+                       styleClass="tip-content" wrapText="true" />
+            </VBox>
+        </HBox>
+        <HBox fx:id="greenBreakPanel" spacing="15" alignment="CENTER_LEFT" styleClass="break-panel-glass" visible="false">
+            <Label text="🌿" style="-fx-font-size: 24px;" />
+            <VBox>
+                <Label text="Green Break Needed!" styleClass="tip-title" />
+                <Label text="Your emissions are spiking. Consider taking a 5 minute walk." styleClass="tip-content" />
+            </VBox>
+        </HBox>
+    </StackPane>
 </VBox>

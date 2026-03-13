@@ -43,3 +43,8 @@ application {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+task runSeeder(type: JavaExec) {
+    mainClass = 'greenthread.DataSeeder'
+    classpath = sourceSets.main.runtimeClasspath
+}
