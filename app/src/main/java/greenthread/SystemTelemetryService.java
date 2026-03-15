@@ -59,8 +59,8 @@ public class SystemTelemetryService {
             String[] parts = line.split(",");
             if (parts.length > 5 && (line.contains("en0") || line.contains("en1"))) {
                 try {
-                    bytesIn += Long.parseLong(parts[4]);
-                    bytesOut += Long.parseLong(parts[5]);
+                    bytesIn += Long.parseLong(parts[2]);
+                    bytesOut += Long.parseLong(parts[3]);
                 } catch (NumberFormatException ignored) {
                 }
             }

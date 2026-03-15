@@ -113,10 +113,52 @@
     -fx-stroke-width: 3;
 }
 
+.chart-series-area-line {
+    -fx-stroke: #4ade80;
+    -fx-stroke-width: 3;
+}
+
+.chart-series-area-fill {
+    -fx-fill: linear-gradient(to bottom, rgba(74, 222, 128, 0.4), rgba(74, 222, 128, 0.0));
+}
+
 .chart-plot-background {
     -fx-background-color: transparent;
 }
 
+/* ScrollPane Styles */
+.chart-scroll-pane {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+}
+
+.chart-scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.chart-scroll-pane .scroll-bar:vertical {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+    -fx-background-radius: 5;
+}
+
+.chart-scroll-pane .scroll-bar:vertical .thumb {
+    -fx-background-color: #38bdf8;
+    -fx-background-radius: 5;
+}
+
+.chart-scroll-pane .scroll-bar:horizontal {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+    -fx-background-radius: 5;
+    -fx-padding: 2;
+}
+ 
+.chart-scroll-pane .scroll-bar:horizontal .thumb {
+    -fx-background-color: #38bdf8;
+    -fx-background-radius: 5;
+}
+ 
 /* Notifications */
 .tip-panel-glass {
     -fx-background-color: rgba(56, 189, 248, 0.1);
@@ -148,4 +190,32 @@
 .offender-item {
     -fx-text-fill: #f8fafc;
     -fx-font-size: 13px;
+}
+
+.insights-container {
+    -fx-background-color: rgba(255, 255, 255, 0.03);
+    -fx-background-radius: 10;
+    -fx-padding: 10;
+    -fx-border-color: rgba(255, 255, 255, 0.05);
+    -fx-border-radius: 10;
+}
+
+.insights-text {
+    -fx-text-fill: #cbd5e1;
+    -fx-font-size: 13px;
+    -fx-line-spacing: 2px;
+}
+
+.action-button-eco {
+    -fx-background-color: #059669;
+    -fx-text-fill: white;
+    -fx-padding: 8 16;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.action-button-eco:hover {
+    -fx-background-color: #10b981;
 }

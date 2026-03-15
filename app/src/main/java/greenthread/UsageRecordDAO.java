@@ -61,20 +61,34 @@ public class UsageRecordDAO {
         return 0.0;
     }
 
+    public double get24HourTotalEmissions() {
+        String sql = "SELECT SUM(co2_emissions) as total FROM usage_records WHERE timestamp >= datetime('now', '-24 hours')";
+        try (Connection conn = DatabaseManager.getConnection();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getDouble("total") * (5.0 / 3600.0);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0.0;
+    }
+
     public List<UsageRecord> getRecordsForLast24Hours() {
         List<UsageRecord> records = new ArrayList<>();
-        // Group by minute (or 5 minutes) to show more data points in the history graph 
-        // especially useful when the app is freshly launched.
-        String sql = "SELECT strftime('%Y-%m-%d %H:%M:00', timestamp) as minute, AVG(cpu_usage) as avg_cpu, AVG(brightness) as avg_brightness, AVG(co2_emissions) as avg_co2 "
-                +
-                "FROM usage_records WHERE timestamp >= datetime('now', '-24 hours') " +
-                "GROUP BY minute ORDER BY minute ASC";
+        // Group by 30-minute buckets (48 points per day) for a cleaner, pro-level visualization.
+        String sql = "SELECT strftime('%Y-%m-%d %H:', timestamp) || " +
+                     "CASE WHEN CAST(strftime('%M', timestamp) AS INT) < 30 THEN '00' ELSE '30' END as bucket, " +
+                     "AVG(cpu_usage) as avg_cpu, AVG(brightness) as avg_brightness, AVG(co2_emissions) as avg_co2 " +
+                     "FROM usage_records WHERE timestamp >= datetime('now', '-24 hours') " +
+                     "GROUP BY bucket ORDER BY bucket ASC";
         try (Connection conn = DatabaseManager.getConnection();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 records.add(new UsageRecord(
-                        rs.getString("minute"),
+                        rs.getString("bucket"),
                         rs.getDouble("avg_cpu"),
                         rs.getDouble("avg_brightness"),
                         rs.getDouble("avg_co2")));
