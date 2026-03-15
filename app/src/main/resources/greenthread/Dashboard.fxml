@@ -62,7 +62,7 @@
             <Label text="EMISSION TRENDS" styleClass="stat-title" />
             <HBox spacing="0" alignment="CENTER_LEFT" VBox.vgrow="ALWAYS">
                 <!-- Sticky Y-Axis -->
-                <NumberAxis fx:id="stickyYAxis" side="LEFT" forceZeroInRange="false" prefWidth="50" animated="false" />
+                <NumberAxis fx:id="stickyYAxis" label="CO2 (g/h)" side="LEFT" forceZeroInRange="false" prefWidth="65" animated="false" />
                 
                 <ScrollPane prefHeight="400" fitToHeight="true" fitToWidth="false" hbarPolicy="ALWAYS" vbarPolicy="NEVER" styleClass="chart-scroll-pane" HBox.hgrow="ALWAYS">
                     <AreaChart fx:id="emissionsChart" animated="false" styleClass="modern-chart" createSymbols="false" minWidth="1200" prefHeight="350">
@@ -70,6 +70,10 @@
                         <yAxis><NumberAxis fx:id="internalYAxis" side="LEFT" forceZeroInRange="false" opacity="0" tickLabelsVisible="false" tickMarkVisible="false" minorTickVisible="false" /> </yAxis>
                     </AreaChart>
                 </ScrollPane>
+            </HBox>
+            <HBox alignment="CENTER">
+                <padding><Insets left="65"/></padding> <!-- Align with stickyYAxis offset -->
+                <Label text="Time" style="-fx-font-size: 11px; -fx-text-fill: #94a3b8;" />
             </HBox>
             <VBox spacing="5" styleClass="insights-container">
                 <Label text="INSIGHTS" styleClass="stat-title" />
