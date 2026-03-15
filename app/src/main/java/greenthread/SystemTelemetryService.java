@@ -80,8 +80,15 @@ public class SystemTelemetryService {
             int lastSpace = line.lastIndexOf(" ");
             if (lastSpace != -1) {
                 String name = line.substring(0, lastSpace);
-                String cpu = line.substring(lastSpace + 1);
-                processes.add(new ProcessInfo(name, cpu + "%"));
+                String cpuStr = line.substring(lastSpace + 1);
+                try {
+                    double rawCpu = Double.parseDouble(cpuStr);
+                    int cores = Runtime.getRuntime().availableProcessors();
+                    double normalizedCpu = rawCpu / cores;
+                    processes.add(new ProcessInfo(name, String.format("%.1f%%", normalizedCpu)));
+                } catch (NumberFormatException e) {
+                    processes.add(new ProcessInfo(name, cpuStr + "%"));
+                }
             }
         }
         return processes;
